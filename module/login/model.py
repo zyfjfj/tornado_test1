@@ -1,8 +1,11 @@
 #coding=utf-8
+from sqlalchemy.ext.declarative import declarative_base
+
+from db import mysql_engine, Base
 
 __author__ = 'zyf'
-from sqlalchemy import Column, String, Integer, VARCHAR,ForeignKey, Float
-from db import Base
+from sqlalchemy import Column, String, Integer, VARCHAR
+
 
 class Article(Base):
     __tablename__ = 'articles'
@@ -26,3 +29,4 @@ Models={'articles':Article,'users':User}
 
 def get_model(name):
     return Models[name]
+

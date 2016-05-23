@@ -1,6 +1,15 @@
 #coding=utf-8
+import os
+
+from base import find_handles
+from db import Base, mysql_engine
+
 __author__ = 'zyf'
 
+
+def create_all():
+    find_handles('/module','model.py')
+    Base.metadata.create_all(mysql_engine)
 '''
 python包含子目录中的模块方法比较简单，关键是能够在sys.path里面找到通向模块文件的路径。
 下面将具体介绍几种常用情况:
@@ -40,3 +49,4 @@ python包含子目录中的模块方法比较简单，关键是能够在sys.path
 
  （4）从(3)可以看出，导入模块关键是能够根据sys.path环境变量的值，找到具体模块的路径。这里仅介绍上面三种简单情况。
 '''
+

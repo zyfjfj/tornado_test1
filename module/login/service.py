@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 import base
 from base import BaseHandler
-from db import engine
+from db import mysql_engine
 from module.login.model import User,Article
 from tornado import gen
 
@@ -14,7 +14,6 @@ __author__ = 'zyf'
 
 @base.route("/")
 class MainHandler(BaseHandler):
-    @tornado.web.authenticated
     def get(self):
         id=self.get_secure_cookie("glxt_user")
         data = self.db.query(Article).all()

@@ -5,7 +5,8 @@ import tornado.web
 from sqlalchemy.orm import scoped_session, sessionmaker
 import module
 from base import BaseHandler
-from db import engine, Base
+from db import mysql_engine, Base
+from module import create_all
 
 
 class MyApplication(tornado.web.Application):
@@ -21,10 +22,10 @@ class MyApplication(tornado.web.Application):
         )
         super(MyApplication, self).__init__(**settings)
         # Have one global connection to the blog DB across all handlers
-        self.db = scoped_session(sessionmaker(bind=engine,
+        self.db = scoped_session(sessionmaker(bind=mysql_engine,
                                      autocommit=False, autoflush=True,
                                      expire_on_commit=False))
-        self.create_all()
+        create_all()
 
     def load_handler_module(self, handler_module, perfix=".*$"):
         """
@@ -58,6 +59,6 @@ class MyApplication(tornado.web.Application):
         if not handlers and "X-Real-Ip" not in request.headers:
             handlers = [i for p, h in self.handlers for i in h if p.match(self.default_host)]
         return handlers
-
+    #
     def create_all(self):
-        Base.metadata.create_all(engine)
+        Base.metadata.create_all(mysql_engine)

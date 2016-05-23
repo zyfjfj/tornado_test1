@@ -4,7 +4,7 @@ import time
 
 import tornado
 from tornado import gen
-import json
+
 import base
 from base import BaseHandler
 
@@ -20,8 +20,3 @@ class SleepHandler(BaseHandler):
 class JustNowHandler(BaseHandler):
     def get(self):
         self.write("i hope just now see you")
-@base.route('/get_json')
-class GetJson(BaseHandler):
-    def get(self):
-        info = {'user': 'leno'}
-        return  self.write(json.dumps(info))

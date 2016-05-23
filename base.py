@@ -6,6 +6,7 @@ import tornado.web
 __author__ = 'zyf'
 
 class BaseHandler(tornado.web.RequestHandler):
+
     def get_current_user(self):
         user_json = self.get_secure_cookie("glxt_user")
         if not user_json: return None
