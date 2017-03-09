@@ -15,7 +15,7 @@ import os.path,module
 if __name__ == "__main__":
     tornado.options.parse_command_line()
     application=MyApplication()
-    application.listen(1234)
+    application.listen(5555)
     for dir_handle in base.find_handles():
         application.load_handler_module(dir_handle)
 
